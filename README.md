@@ -1,14 +1,19 @@
 # ERAScan_Task
 
-Submission And Extraction of DL Status Form Data from <a>https://parivahan.gov.in/rcdlstatus/?pur_cd=101</a> 
+Submission And Extraction of DL Status Form Data from <a>https://parivahan.gov.in/rcdlstatus/?pur_cd=101</a> <strong> bypassing CAPTCHA
+</strong>
 
-# Python Libraries Used - 
+## Python Libraries Used - 
 * Scrapy
 * Beautiful Soup
 
-# How does it work - 
+## How does it work - 
 * Clone this repository.
+* Set up a python virtual environment and activate it in your terminal. (Refer - <a>https://docs.python.org/3/tutorial/venv.html</a>)
 * Open it in terminal and run the following command - 
+  * ~~~ 
+        pip install -r requirements.txt
+    ~~~
   * ~~~ 
         scrapy crawl parivahan
     ~~~
@@ -20,11 +25,6 @@ Submission And Extraction of DL Status Form Data from <a>https://parivahan.gov.i
       ~~~ 
           Enter DOB: 
       ~~~
-   * Input captcha text from the image generated in EraScan_Task/captcha.jpg as shown below - 
-      ~~~ 
-          Enter captcha:
-      ~~~
-      <img src="https://github.com/kushagra219/ERAScan_Task/blob/master/captcha.jpg">
   * The result will be printed in the terminal in raw form but of the format 
       ```javascript 
         {
@@ -56,4 +56,9 @@ Submission And Extraction of DL Status Form Data from <a>https://parivahan.gov.i
                 }
         }
     ```
-      
+
+## Reference Links
+* https://docs.scrapy.org/en/latest/
+* http://xpather.com/
+* https://readthedocs.org/projects/beautiful-soup-4/
+* https://github.com/madmaze/pytesseract
