@@ -3,6 +3,23 @@ import urllib.request as urllib3
 from urllib.parse import urljoin
 import bs4
 from scrapy.selector import Selector
+from PIL import Image
+import pytesseract
+
+def get_captcha(img_url):
+        urllib3.urlretrieve(img_url, "captcha.jpg")
+        pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract'
+        try:
+            solved_captcha = pytesseract.image_to_string('captcha.jpg', timeout=5) # Timeout after 2 seconds
+            if solved_captcha == '':
+                return None
+            else:
+                return solved_captcha
+            # print(pytesseract.image_to_string('captcha.jpg', timeout=0.5)) # Timeout after half a second
+        except RuntimeError as timeout_error:
+            # Tesseract processing is terminated
+            print(timeout_error)
+
 
 class ParivahanSpider(scrapy.Spider):
     name = 'parivahan'
@@ -14,8 +31,9 @@ class ParivahanSpider(scrapy.Spider):
         dob = input("Enter DOB (DD-MM-YYYY): ")
         img_rel_url = response.selector.xpath('//*[@id="form_rcdl:j_idt34:j_idt41"]/@src').get()
         img_url = urljoin("https://parivahan.gov.in", img_rel_url)
-        urllib3.urlretrieve(img_url, "captcha.jpg")
-        captcha = input("Enter captcha: ")
+        # urllib3.urlretrieve(img_url, "captcha.jpg")
+        captcha = get_captcha(img_url)
+        # print(captcha)
         yield scrapy.FormRequest.from_response(
             response,
             # 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml',
