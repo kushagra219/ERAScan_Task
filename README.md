@@ -15,6 +15,9 @@ Submission And Extraction of DL Status Form Data from <a>https://parivahan.gov.i
         pip install -r requirements.txt
     ~~~
   * ~~~ 
+        cd spider
+    ~~~ 
+  * ~~~ 
         scrapy crawl parivahan
     ~~~
   * Input your driving license no. when it prompts 
